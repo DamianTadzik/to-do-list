@@ -1,9 +1,10 @@
+// INDEX page
 document.addEventListener('DOMContentLoaded', function () {
-    var showLoginButton = document.getElementById('show-login');
-    var showRegisterButton = document.getElementById('show-register');
-    var loginPopup = document.querySelector('.login-popup');
-    var registerPopup = document.querySelector('.register-popup');
-    var registerButton = document.getElementById('register-button');
+    const showLoginButton = document.getElementById('show-login');
+    const showRegisterButton = document.getElementById('show-register');
+    const loginPopup = document.querySelector('.login-popup');
+    const registerPopup = document.querySelector('.register-popup');
+    const registerButton = document.getElementById('register-button');
 
     // Show the login popup when the login button is clicked
     showLoginButton.addEventListener('click', function () {
@@ -61,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function clearLoginForm() {
+
         // TODO: Add logic to clear login form inputs
     }
 
