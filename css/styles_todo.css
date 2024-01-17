@@ -1,0 +1,36 @@
+body {
+    background: linear-gradient(to right, #3a7bd5, #5c4491);
+    font-family: "Raleway", sans-serif;
+    height: 100vh;
+}
+
+.title {
+    color: #FFF;
+    font-family: Italiana;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+}
+
+
+hr {
+    border-bottom: 1px solid white;
+}
+
+#show-logout {
+    position: fixed;
+    top: 20px;
+    right: 10px;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #222;
+    background: #f5f5f5;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
