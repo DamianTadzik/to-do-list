@@ -11,6 +11,7 @@ TODO:
 - [ ] todo page in html and css
 - [ ] database connection
 - [ ] login/register functionality
+- [ ] server with connection do mySQL 
 
 ADDITIONAL:
 - [ ] login with google??
