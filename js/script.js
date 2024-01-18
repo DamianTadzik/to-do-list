@@ -5,9 +5,13 @@ document.addEventListener('DOMContentLoaded', function () {
     /* login variables declarations */
     const buttonShowLogin = document.getElementById('button-show-login');
     const popupLogin = document.querySelector('.popup-login');
+    const buttonSignin = document.getElementById('button-signin');
+
     /* register variables declarations */
     const buttonShowRegister = document.getElementById('button-show-register');
     const popupRegister = document.querySelector('.popup-register');
+    const buttonSignup = document.getElementById('button-signup');
+
 /* **************** VARIABLES SECTION END **************** */
 
 /* **************** LOGIN POPUP SECTION BEGIN **************** */
@@ -22,8 +26,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     /*  */
     function clearLoginForm() {
-
+        document.getElementById("login-input-email").value =
+            document.getElementById("login-input-email").defaultValue;
+        document.getElementById("login-input-password").value =
+            document.getElementById("login-input-password").defaultValue;
     }
+    /* Handles Sign up button click */
+    buttonSignin.addEventListener('click', function () {
+        console.log("LOGGING IN");
+    });
 /* **************** LOGIN POPUP SECTION END **************** */
 
 /* **************** REGISTER POPUP SECTION BEGIN **************** */
@@ -38,8 +49,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     /*  */
     function clearRegisterForm() {
-
+        document.getElementById("register-input-email").value =
+            document.getElementById("register-input-email").defaultValue;
+        document.getElementById("register-input-password").value =
+            document.getElementById("register-input-password").defaultValue;
     }
+    /* Handles Sign in button click */
+    buttonSignup.addEventListener('click', function () {
+        console.log("REGISTERING UP")
+    })
 /* ******** REGISTER POPUP SECTION END ******** */
 
     /*
