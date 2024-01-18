@@ -1,33 +1,48 @@
-// INDEX page
+/* Code in this section executes when all HTML contents are loaded */
 document.addEventListener('DOMContentLoaded', function () {
-    const showLoginButton = document.getElementById('show-login');
-    const showRegisterButton = document.getElementById('show-register');
-    const loginPopup = document.querySelector('.login-popup');
-    const registerPopup = document.querySelector('.register-popup');
-    const registerButton = document.getElementById('register-button');
 
-    // Show the login popup when the login button is clicked
-    showLoginButton.addEventListener('click', function () {
-        loginPopup.classList.add('active');
+/* **************** VARIABLES SECTION BEGIN **************** */
+    /* login variables declarations */
+    const buttonShowLogin = document.getElementById('button-show-login');
+    const popupLogin = document.querySelector('.popup-login');
+    /* register variables declarations */
+    const buttonShowRegister = document.getElementById('button-show-register');
+    const popupRegister = document.querySelector('.popup-register');
+/* **************** VARIABLES SECTION END **************** */
+
+/* **************** LOGIN POPUP SECTION BEGIN **************** */
+    /* Shows the login popup when the login button is clicked */
+    buttonShowLogin.addEventListener('click', function () {
+        popupLogin.classList.add('active');
     });
-
-    // Show the register popup when the register button is clicked
-    showRegisterButton.addEventListener('click', function () {
-        registerPopup.classList.add('active');
-    });
-
-    // Close the login popup when the close button is clicked
-    document.querySelector('.login-popup .close-btn').addEventListener('click', function () {
+    /* Hides the login popup and clears the input forms when x is clicked */
+    document.querySelector('.popup-login .button-close').addEventListener('click', function () {
+        popupLogin.classList.remove('active');
         clearLoginForm();
-        loginPopup.classList.remove('active');
     });
+    /*  */
+    function clearLoginForm() {
 
-    // Close the register popup when the close button is clicked
-    document.querySelector('.register-popup .close-btn').addEventListener('click', function () {
+    }
+/* **************** LOGIN POPUP SECTION END **************** */
+
+/* **************** REGISTER POPUP SECTION BEGIN **************** */
+    /* Shows the register popup when the register button is clicked */
+    buttonShowRegister.addEventListener('click', function () {
+        popupRegister.classList.add('active');
+    });
+    /* Hides the register popup and clears the input forms when x is clicked */
+    document.querySelector('.popup-register .button-close').addEventListener('click', function () {
+        popupRegister.classList.remove('active');
         clearRegisterForm();
-        registerPopup.classList.remove('active');
     });
+    /*  */
+    function clearRegisterForm() {
 
+    }
+/* ******** REGISTER POPUP SECTION END ******** */
+
+    /*
     // Register button click logic
     registerButton.addEventListener('click', async function () {
         // Get provided information
@@ -51,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Handle successful registration
                 console.log('User registered successfully');
                 clearRegisterForm();
-                registerPopup.classList.remove('active');
+                popupRegister.classList.remove('active');
             } else {
                 // Handle registration error
                 console.error('Error registering user');
@@ -60,16 +75,5 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error registering user', error);
         }
     });
-
-    function clearLoginForm() {
-
-        // TODO: Add logic to clear login form inputs
-    }
-
-    function clearRegisterForm() {
-        // TODO: Add logic to clear register form inputs
-    }
-
-    // Log in button
-    // log in logic here
+    */
 });
