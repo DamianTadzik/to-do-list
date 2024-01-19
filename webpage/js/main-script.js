@@ -34,6 +34,11 @@ document.addEventListener('DOMContentLoaded', function () {
     /* Handles Sign up button click */
     buttonSignin.addEventListener('click', function () {
         console.log("LOGGING IN");
+
+        /* if logging in is successful */
+        clearLoginForm();
+        // TODO jump to todo.html page
+        window.location.href = "todo.html";
     });
 /* **************** LOGIN POPUP SECTION END **************** */
 
@@ -57,8 +62,10 @@ document.addEventListener('DOMContentLoaded', function () {
     /* Handles Sign in button click */
     buttonSignup.addEventListener('click', function () {
         console.log("REGISTERING UP")
-    })
-/* ******** REGISTER POPUP SECTION END ******** */
+        window.location.href = "todo.html";
+    });
+/* **************** REGISTER POPUP SECTION END **************** */
+
 
     /*
     // Register button click logic

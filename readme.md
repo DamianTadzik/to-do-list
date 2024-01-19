@@ -7,11 +7,14 @@ Helpful links:
 
 TODO:
 - [x] main page in html and css
-- [ ] main page js logic
+- [ ] jump from main page to todo page and vice versa
 - [ ] todo page in html and css
 - [ ] database connection
 - [ ] login/register functionality
-- [ ] server with connection do mySQL 
+- [x] server with connection to mySQL 
+- [ ] create table for users and passwords 
+- [ ] somehow implement the server's logic XD
+
 
 ADDITIONAL:
 - [ ] login with google??

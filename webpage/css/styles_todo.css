@@ -18,7 +18,7 @@ hr {
     border-bottom: 1px solid white;
 }
 
-#show-logout {
+#button-logout {
     position: fixed;
     top: 20px;
     right: 10px;
