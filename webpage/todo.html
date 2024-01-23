@@ -12,11 +12,36 @@
 </head>
 
 <body>
-    <h1 class="title">The Ultimate To-Do List</h1>
-    <hr>
-    <div>
-        <button id="button-logout">Log out</button>
+    <!-- Upper bar with title and logout button -->
+    <div class="title-logout-section">
+        <h1 class="title">The Ultimate To-Do List</h1>
+        <div>
+            <button id="button-logout">Log out</button>
+        </div>
+        <hr>
     </div>
+
+    <!-- Central section with tasks -->
+    <div class="class-task-list">
+        <div class="class-task">
+            <span class="task-content">Test task contents</span>
+            <button class="button-delete">Delete</button>
+            <button class="button-complete">Complete</button>
+        </div>
+        <div class="class-task">
+            <span class="task-content">Second test task</span>
+            <button class="button-delete">Delete</button>
+            <button class="button-complete">Complete</button>
+        </div>
+    </div>
+
+    <!-- Lower bar with input field -->
+    <div class="input-section-fixed">
+        <hr>
+        <input type="text" id="input-task">
+        <button id="button-add-task">Add task</button>
+    </div>
+
 </body>
 
 </html>

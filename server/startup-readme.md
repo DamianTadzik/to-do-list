@@ -1,4 +1,4 @@
-Alright, let's set you up to connect your local web page to the MySQL database provided by UST. Since your web page is local and you're dealing with client-side JavaScript, you'll need to create a server-side script that acts as an intermediary to handle database connections. Here's a simplified example using Node.js and Express:
+Alright, let's set you up to connect your local web page to the MySQL database provided by UST. Since your web page is local, and you're dealing with client-side JavaScript, you'll need to create a server-side script that acts as an intermediary to handle database connections. Here's a simplified example using Node.js and Express:
 
 1. Install Node.js
 

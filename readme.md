@@ -17,5 +17,5 @@ TODO:
 
 
 ADDITIONAL:
-- [ ] login with google??
+- [ ] login with Google??
 
