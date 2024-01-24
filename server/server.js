@@ -26,35 +26,35 @@ databaseConnection.connect((err) => {
 });
 
 app.post('/register', (req, res) => {
-  const { email, password } = req.body;
-  console.log('New user trying to register:', email, password);
+  const { username, password } = req.body;
+  console.log('New user trying to register:', username, password);
 
-  /* Empty password or email safety mechanism */
-  if (!email || !password) {
+  /* Empty password or username safety mechanism */
+  if (!username || !password) {
     res.status(400).send();
-    console.log('New user tried to register with empty email or password');
+    console.log('New user tried to register with empty username or password');
     return;
   }
 
-  /* Checking if email already exists in database */
-  const sqlCheck = 'SELECT * FROM users WHERE email = ?';
-  databaseConnection.query(sqlCheck, [email], (checkErr, checkResult) => {
+  /* Checking if username already exists in database */
+  const sqlCheck = 'SELECT * FROM users WHERE username = ?';
+  databaseConnection.query(sqlCheck, [username], (checkErr, checkResult) => {
     if (checkErr) {
-      console.error('Error checking email in the database:', checkErr);
+      console.error('Error checking username in the database:', checkErr);
       res.status(500).send();
       return;
     }
 
-    /* If there are rows in the result the email already exists */
+    /* If there are rows in the result the username already exists */
     if (checkResult.length > 0) {
-      console.log('New user email is already taken', email);
+      console.log('New user username is already taken:', username);
       res.status(409).send();
       return;
     }
 
     /* Proceed with user registration if we got to this point */
-    const sqlInsert = 'INSERT INTO users (email, password) VALUES (?, ?)';
-    databaseConnection.query(sqlInsert, [email, password], (err, result) => {
+    const sqlInsert = 'INSERT INTO users (username, password) VALUES (?, ?)';
+    databaseConnection.query(sqlInsert, [username, password], (err, result) => {
       if (err) {
         console.error('Error registering user:', err);
         res.status(500).send();

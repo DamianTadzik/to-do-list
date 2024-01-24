@@ -66,19 +66,19 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to handle user registration
     function register() {
         console.log("Trying to register up");
-        const email = document.getElementById('register-input-email').value.trim();
+        const username = document.getElementById('register-input-username').value.trim();
         const password = document.getElementById('register-input-password').value.trim();
 
-        /* Empty password or email safety mechanism */
-        if (!email || !password) {
-            console.error('Tried to register with empty email or password');
+        /* Empty password or username safety mechanism */
+        if (!username || !password) {
+            console.error('Tried to register with empty username or password');
         } else {
             fetch('http://localhost:3000/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ username, password }),
             })
             .then(response => {
                 if (response.status === 200) {
