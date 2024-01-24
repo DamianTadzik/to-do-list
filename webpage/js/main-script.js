@@ -34,10 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
     /* Handles Sign up button click */
     buttonSignin.addEventListener('click', function () {
         console.log("LOGGING IN");
-
-        /* if logging in is successful */
+        login();
         clearLoginForm();
-        // TODO jump to todo.html page
         window.location.href = "todo.html";
     });
 /* **************** LOGIN POPUP SECTION END **************** */
@@ -61,44 +59,66 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     /* Handles Sign in button click */
     buttonSignup.addEventListener('click', function () {
-        console.log("REGISTERING UP")
-        window.location.href = "todo.html";
+        register();
     });
 /* **************** REGISTER POPUP SECTION END **************** */
 
+    // Function to handle user registration
+    function register() {
+        console.log("Trying to register up");
+        const email = document.getElementById('register-input-email').value.trim();
+        const password = document.getElementById('register-input-password').value.trim();
 
-    /*
-    // Register button click logic
-    registerButton.addEventListener('click', async function () {
-        // Get provided information
-        const newEmail = document.getElementById('new-email').value;
-        const newPassword = document.getElementById('new-password').value;
-
-        // Send a POST request to the server to register the user
-        try {
-            const response = await fetch('/register', {
+        /* Empty password or email safety mechanism */
+        if (!email || !password) {
+            console.error('Tried to register with empty email or password');
+        } else {
+            fetch('http://localhost:3000/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    newEmail,
-                    newPassword,
-                }),
-            });
-
-            if (response.ok) {
-                // Handle successful registration
-                console.log('User registered successfully');
-                clearRegisterForm();
-                popupRegister.classList.remove('active');
-            } else {
-                // Handle registration error
-                console.error('Error registering user');
-            }
-        } catch (error) {
-            console.error('Error registering user', error);
+                body: JSON.stringify({ email, password }),
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    console.log("Registered successfully");
+                    // ok create user specified todo to and switch page
+                    window.location.href = "todo.html";
+                } else if (response.status === 400) {
+                    throw new Error(`E-mail and password cannot be empty`);
+                } else if (response.status === 409) {
+                    clearRegisterForm();
+                    throw new Error(`Account already created`);
+                } else {
+                    throw new Error(`Failed with status: ${response.status}`);
+                }
+            })
+            .catch(error => {
+                console.error('Error during registration:', error);
+            })
         }
-    });
-    */
+    }
+
+    // Function to handle user login
+    function login() {
+      const username = document.getElementById('login-input-email').value.trim();
+      const password = document.getElementById('login-input-password').value.trim();
+
+      fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      })
+        .then(response => {
+          if (response.status === 200) {
+            document.getElementById('login-message').innerText = 'Login successful';
+          } else {
+            document.getElementById('login-message').innerText = 'Invalid username or password';
+          }
+        })
+        .catch(error => console.error('Error during login:', error));
+    }
 });

@@ -3,6 +3,7 @@ body {
     background: linear-gradient(to right, #3a7bd5, #5c4491);
     font-family: "Raleway", sans-serif;
     height: 100vh;
+    overflow: hidden;
 }
 
 /* **************** UPPER SECTION **************** */
@@ -55,7 +56,7 @@ body {
     justify-content: flex-start; /* Adjust this to your preference */
     max-height: calc(100vh - 120px); /* Adjust the maximum height for your upper and lower bars */
     overflow-y: auto; /* Enable vertical scrolling if needed */
-    margin-top: 60px; /* Add some top margin to move the task list below the upper section */
+    margin-top: 50px; /* Add some top margin to move the task list below the upper section */
     width: 80%;
     left: 50%; /* Set the left position to 50% */
     transform: translateX(-50%); /* Use transform to center horizontally */
