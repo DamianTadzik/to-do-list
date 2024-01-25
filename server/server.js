@@ -68,19 +68,24 @@ app.post('/register', (req, res) => {
 
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
+  console.log('User trying to log in:', username, password);
 
+  /* Sql query for logging in */
   const sql = 'SELECT * FROM users WHERE username = ? AND password = ?';
   databaseConnection.query(sql, [username, password], (err, result) => {
     if (err) {
       console.error('Error logging in:', err);
-      res.status(500).send('Error logging in');
+      res.status(500).send();
       return;
     }
 
+    /* If there is such username-password combination in database */
     if (result.length > 0) {
-      res.status(200).send('Login successful');
+      console.log('User logged in:', username);
+      res.status(200).send();
     } else {
-      res.status(401).send('Invalid username or password');
+      console.log('User provided invalid password:', username);
+      res.status(401).send();
     }
   });
 });
