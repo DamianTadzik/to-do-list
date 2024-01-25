@@ -74,7 +74,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function completeTask(task) {
-        task.style.textDecoration = 'line-through';
+        let taskContent = task.querySelector('.task-content')
+        taskContent.style.textDecoration = 'line-through';
     }
 
 /* **************** REMOVE/COMPLETE TASK END **************** */
