@@ -1,58 +1,98 @@
 /* Code in this section executes when all HTML contents are loaded */
 document.addEventListener('DOMContentLoaded', function () {
 
+/* **************** LOGIN/REGISTER SUCCESS BEGIN **************** */
+    const userID = sessionStorage.getItem('userID');
+    if (userID) {
+        console.log('User ID obtained:', userID);
+        sessionStorage.removeItem('userID');
+        loadTasks(userID);
+    }
+
+    function loadTasks(userID) {
+        fetch(`http://localhost:3000/getTasks?userID=${userID}`)
+        .then(response => response.json())
+        .then(tasks => {
+            displayTasks(tasks);
+        })
+        .catch(error => console.error("Error loading tasks:", error));
+    }
+/* **************** LOGIN/REGISTER SUCCESS END **************** */
+
 /* **************** VARIABLES SECTION BEGIN **************** */
     /* logout variables declarations */
     const buttonLogout = document.getElementById('button-logout');
 
-    /* Task remove complete variables */
-
-
     /* Task add variables and declarations */
     const buttonAddTask = document.getElementById('button-add-task');
     const taskInput = document.getElementById('input-task');
-
 /* **************** VARIABLES SECTION END **************** */
 
 /* **************** LOGOUT BUTTON BEGIN **************** */
     buttonLogout.addEventListener('click', function () {
-        console.log("LOGGING OUT");
+        console.log("Logging out");
+        sessionStorage.clear();
         window.location.href = "main.html";
     });
 /* **************** LOGOUT BUTTON END **************** */
 
 /* **************** ADD TASK BEGIN **************** */
     buttonAddTask.addEventListener('click', function () {
-        addTask();
-        clearInput();
+        addTask(userID);
     });
 
     taskInput.addEventListener('keydown', function (event) {
        if (event.key === 'Enter') {
-           addTask();
-           clearInput();
+           addTask(userID);
        }
     });
+
+    function addTask(userID) {
+        /* Obtain input and clear */
+        const taskContent = taskInput.value.trim();
+        clearInput();
+        /* Send task to server */
+        fetch(`http://localhost:3000/addTask?userID=${userID}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                taskName: taskContent,
+                completed: false,
+            }),
+        })
+        .then(response => response.json())
+        .then(newTask => {
+            console.log(newTask);
+            displayTask(newTask);
+        })
+        .catch(error => console.error("Error adding task:", error));
+    }
 
     function clearInput() {
         taskInput.value = '';
     }
 
-    function addTask() {
-        let taskContent = taskInput.value.trim();
-        if (taskContent !== "") {
-            let taskList = document.querySelector(".class-task-list");
+    function displayTasks(tasks) {
+        tasks.forEach(task => {
+            displayTask(task);
+        });
+    }
 
-            /* Create new task element */
-            let taskElement = document.createElement("div");
-            taskElement.className = 'class-task'
-            taskElement.innerHTML = `` +
-                `<span class="task-content">${taskContent}</span>` +
-                `<button class="button-delete"">Delete</button>` +
-                `<button class="button-complete">Complete</button>` +
-                ``;
-
-            taskList.appendChild(taskElement);
+    function displayTask(task) {
+        let taskList = document.querySelector(".class-task-list");
+        /* Create new task element in UI */
+        let taskElement = document.createElement("div");
+        taskElement.className = 'class-task'
+        taskElement.innerHTML = `` +
+            `<span class="task-content">${task.task_name}</span>` +
+            `<button class="button-delete"">Delete</button>` +
+            `<button class="button-complete">Complete</button>` +
+            ``;
+        taskList.appendChild(taskElement);
+        if (task.completed) {
+            completeTaskUI(taskElement);
         }
     }
 /* **************** ADD TASK END **************** */
@@ -63,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
             deleteTask(event.target.parentNode);
         }
         if (event.target.classList.contains('button-complete')) {
-            completeTask(event.target.parentNode);
+            completeTaskUI(event.target.parentNode);
         }
 
     });
@@ -73,10 +113,15 @@ document.addEventListener('DOMContentLoaded', function () {
         taskList.removeChild(task);
     }
 
-    function completeTask(task) {
+    function completeTaskUI(task) {
         let taskContent = task.querySelector('.task-content')
         taskContent.style.textDecoration = 'line-through';
     }
 
 /* **************** REMOVE/COMPLETE TASK END **************** */
+
+
+
+
+
 });

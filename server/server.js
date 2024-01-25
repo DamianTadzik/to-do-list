@@ -9,6 +9,7 @@ const port = 3000; // Choose a port that is not in use
 app.use(cors());
 app.use(bodyParser.json());
 
+
 const databaseConnection = mysql.createConnection({
   host: 'mysql.agh.edu.pl',
   user: 'anitkauz',
@@ -24,6 +25,7 @@ databaseConnection.connect((err) => {
   }
   console.log('Connected to MySQL');
 });
+
 
 app.post('/register', (req, res) => {
   const { username, password } = req.body;
@@ -60,11 +62,16 @@ app.post('/register', (req, res) => {
         res.status(500).send();
         return;
       }
-      console.log('New user account created!');
-      res.status(200).send();
+      /* Obtain user id */
+      const userID = result.insertId;
+
+      /* Send back user id */
+      console.log('New user account created! userID:', userID);
+      res.status(200).json({ userID });
     });
   });
 });
+
 
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
@@ -81,14 +88,57 @@ app.post('/login', (req, res) => {
 
     /* If there is such username-password combination in database */
     if (result.length > 0) {
-      console.log('User logged in:', username);
-      res.status(200).send();
+      /* Obtain userID */
+      const userID = result[0].user_id;
+      console.log('User:', username, 'logged in with ID:', userID);
+      /* Send back userID */
+      res.status(200).json({ userID });
     } else {
       console.log('User provided invalid password:', username);
       res.status(401).send();
     }
   });
 });
+
+
+app.get('/getTasks', (req, res) => {
+  const userID = req.query.userID;
+  console.log('User:', userID, 'is trying to fetch tasks');
+
+  /* 'tasks' table with columns 'task_id', 'user_id', 'task_name', 'completed' */
+  const sql = `SELECT * FROM tasks WHERE user_id = ?`;
+  databaseConnection.query(sql, [userID], (error, results) => {
+    if (error) {
+      console.error('Error fetching tasks:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    } else {
+      console.log('User:', userID, 'fetched tasks successfully');
+      res.json(results);
+    }
+  });
+});
+
+
+app.post('/addTask', (req, res) => {
+  const userID = req.query.userID;
+  const { taskName, completed } = req.body;
+  console.log('User:', userID, 'is trying to add new task');
+
+  /* Insert new task into the 'tasks' table */
+  const sql = 'INSERT INTO tasks (user_id, task_name, completed) VALUES (?, ?, ?)';
+  const values = [userID, taskName, completed];
+  databaseConnection.query(sql, values, (error, results, fields) => {
+    if (error) {
+      console.error('Error adding task to the database:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    } else {
+      const newTaskID = results.insertId;
+      console.log('User:', userID, 'added new task:', newTaskID);
+      res.status(200).json({ taskID: newTaskID, task_name: taskName, completed });
+    }
+  });
+});
+
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);

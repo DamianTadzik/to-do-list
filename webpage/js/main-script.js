@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!username || !password) {
             console.error('Tried to log in with empty username or password');
         } else {
+            let successFlag = false;
             fetch('http://localhost:3000/login', {
                 method: 'POST',
                 headers: {
@@ -54,13 +55,22 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .then(response => {
                 if (response.status === 200) {
-                    console.log("Logged in successfully");
-                    // ok create user specified todo to and switch page
-                    window.location.href = "todo.html";
+                    successFlag = true;
+                    return response.json()
                 } else {
                     clearLoginForm();
                     console.error("Tried to log in with invalid username or password");
                     // document.getElementById('login-message').innerText = 'Invalid username or password';
+                }
+            })
+            .then(responseData => {
+                if (successFlag) {
+                    const userID = responseData.userID;
+                    console.log("Logged in successfully, user id:", userID);
+                    /* Storing id locally */
+                    sessionStorage.setItem('userID', userID);
+                    /* Website change */
+                    window.location.href = "todo.html";
                 }
             })
             .catch(error => console.error('Error during login:', error));
@@ -99,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!username || !password) {
             console.error('Tried to register with empty username or password');
         } else {
+            let successFlag = false;
             fetch('http://localhost:3000/register', {
                 method: 'POST',
                 headers: {
@@ -108,9 +119,8 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .then(response => {
                 if (response.status === 200) {
-                    console.log("Registered successfully");
-                    // ok create user specified todo to and switch page
-                    window.location.href = "todo.html";
+                    successFlag = true;
+                    return response.json();
                 } else if (response.status === 400) {
                     console.error(`E-mail and password cannot be empty`);
                 } else if (response.status === 409) {
@@ -120,11 +130,20 @@ document.addEventListener('DOMContentLoaded', function () {
                     throw new Error(`Failed with status: ${response.status}`);
                 }
             })
+            .then(responseData => {
+                if (successFlag) {
+                    const userID = responseData.userID;
+                    console.log("Registered successfully, user id:", userID);
+                    /* Storing id locally */
+                    sessionStorage.setItem('userID', userID);
+                    /* Website change */
+                    window.location.href = "todo.html";
+                }
+            })
             .catch(error => {
                 console.error('Error during registration:', error);
             })
         }
     }
 /* **************** REGISTER POPUP SECTION END **************** */
-
 });
