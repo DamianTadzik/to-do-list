@@ -1,0 +1,145 @@
+
+body {
+    background: linear-gradient(to right, #3a7bd5, #5c4491);
+    font-family: "Raleway", sans-serif;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* **************** UPPER SECTION **************** */
+.title-logout-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.title-logout-section hr {
+    border-bottom: 1px solid white;
+}
+
+.title {
+    color: #FFF;
+    font-family: Italiana;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    margin: 0; /* Remove default margin to prevent unwanted spacing */
+}
+
+#button-logout {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #222;
+    background: #f5f5f5;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+
+/* **************** TO DO SECTION **************** */
+.class-task-list {
+    position: fixed;
+    display: block;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Adjust this to your preference */
+    max-height: calc(100vh - 120px); /* Adjust the maximum height for your upper and lower bars */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+    margin-top: 50px; /* Add some top margin to move the task list below the upper section */
+    width: 80%;
+    left: 50%; /* Set the left position to 50% */
+    transform: translateX(-50%); /* Use transform to center horizontally */
+}
+
+.class-task {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+.class-task .task-content {
+    flex-grow: 1;
+    color: #333;
+    overflow: hidden; /* Ensure the content doesn't overflow */
+    white-space: nowrap; /* Prevent the content from wrapping to a new line */
+    text-overflow: ellipsis; /* Display an ellipsis (...) if the content overflows */
+}
+
+.class-task .button-delete {
+    background-color: #ff6961;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.class-task .button-complete {
+    background-color: #77dd77; /* A nice green color for completed tasks */
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+
+/* **************** LOWER SECTION **************** */
+.input-section-fixed {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.input-section-fixed hr {
+    border-top: 1px solid white;
+}
+
+#button-add-task {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #222;
+    background: #f5f5f5;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 10px;
+    box-sizing: border-box;
+}
+
+#input-task {
+    height: 38px;
+    width: 60%; /* Set the input width to 60% */
+    margin: 0 auto; /* Center the input */
+    font-size: 15px;
+    font-weight: 600;
+    color: #222;
+    background: #f5f5f5;
+    border-radius: 5px;
+    display: block; /* Ensure it's a block-level element for the margin to work */
+    padding: 5px; /* Optional: Add some padding for better aesthetics */
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
